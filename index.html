@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .btn {
+            background-color: #4CAF50;
+            border-radius: 5px;
+            position: absolute; /* Make the button position absolute */
+            transition: all 0.2s; /* Smooth transition for movement */
+        }
+        .btn:hover {
+            background-color: #3e8e41;
+        }
+    </style>
+</head>
+<body>
+    <button class="btn" id="movingButton">Click me</button>
+
+    <script>
+        const button = document.getElementById('movingButton');
+        
+        document.addEventListener('mousemove', (event) => {
+            const buttonRect = button.getBoundingClientRect();
+            const mouseX = event.clientX;
+            const mouseY = event.clientY;
+
+            // Check if the mouse is within 100 pixels of the button
+            if (mouseX > buttonRect.left - 100 && mouseX < buttonRect.right + 100 &&
+                mouseY > buttonRect.top - 100 && mouseY < buttonRect.bottom + 100) {
+                // Generate random positions within the window
+                const randomX = Math.random() * (window.innerWidth - buttonRect.width);
+                const randomY = Math.random() * (window.innerHeight - buttonRect.height);
+                button.style.left = `${randomX}px`;
+                button.style.top = `${randomY}px`;
+            }
+        });
+    </script>
+</body>
+</html>
