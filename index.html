@@ -5,21 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .btn{
+        .btn {
             background-color: #4CAF50;
             border-radius: 5px;
+            position: absolute; /* Position it absolutely */
         }
-        .btn:hover{
+        .btn:hover {
             background-color: #3e8e41;
         }
     </style>
 </head>
 <body>
     <div class="question">
-        <p>Are you stupid ? </p>
+        <p>Are you stupid?</p>
         <br>
         <button class="btn yes">Yes</button>
-        <button class="btn no1">No</button>
+        <button class="btn no1" id="noButton">No</button>
     </div>
+
+    <script>
+        const noButton = document.getElementById('noButton');
+
+        document.addEventListener('mousemove', (event) => {
+            const buttonRect = noButton.getBoundingClientRect();
+            const mouseX = event.clientX;
+            const mouseY = event.clientY;
+
+            // Check if the mouse is near the button (within 50px)
+            if (mouseX >= buttonRect.left - 50 && mouseX <= buttonRect.right + 50 &&
+                mouseY >= buttonRect.top - 50 && mouseY <= buttonRect.bottom + 50) {
+                // Generate random position within the window
+                const randomX = Math.random() * (window.innerWidth - buttonRect.width);
+                const randomY = Math.random() * (window.innerHeight - buttonRect.height);
+
+                // Set new position for the button
+                noButton.style.left = randomX + 'px';
+                noButton.style.top = randomY + 'px';
+            }
+        });
+    </script>
 </body>
 </html>
